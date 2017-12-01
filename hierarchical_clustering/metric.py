@@ -49,34 +49,4 @@ def l1(x, y):
     return np.sum(np.abs(x-y))
 
 
-"""
-metric = MetricsFunctions("eucl")
-left_list = [9, 1]
-left_list = np.asarray(left_list)
-right_list = [2, 3]
-right_list = np.asarray(right_list)
-print(metric.compute(left_list, right_list))
-"""
 
-a = [[1,2,1],[1,1,0],[3,3,3],[4,4,4]]
-a = np.array(a)
-print(np.argmin(a))
-print(a.argmin(axis=0))
-print(a.argmin(axis=1))
-print(np.min(np.min(a, axis=1), axis=0))
-print(np.argmin(a,axis=0))
-print(np.argmin(a,axis=1))
-
-def coordinates(array):
-
-    #x=np.mod(np.argmin(array),np.shape(array)[0])
-    #x=np.mod(np.argmin(array),np.shape(array)[0])
-    #y=np.argmin(array)//array[0].size
-    p,q=np.unravel_index(array.argmin(), array.shape)
-
-    return np.unravel_index(array.argmin(), array.shape)
-
-print(coordinates(a))
-
-
-#print(np.amin(a[:,1]))

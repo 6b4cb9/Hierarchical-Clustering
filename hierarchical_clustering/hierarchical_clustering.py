@@ -1,6 +1,13 @@
 import numpy as np
 
 
+class StepInfo:
+    def __init__(self):
+        self.cluster_list = None
+        self.initial_distance = None
+        self.current_distance = None
+
+
 class HierarchicalClustering:
     def __init(self, affine, linkage, n_clusters):
         self.affine = affine
@@ -8,9 +15,7 @@ class HierarchicalClustering:
         self.n_clusters = n_clusters
         self._points = None
         self._labels = None
-        self._cluster_list = None
-        self._initial_distance = None
-        self._current_distance = None
+        self._step_info = StepInfo()
 
     def fit(self, X):
         self._points = X

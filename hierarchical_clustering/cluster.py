@@ -71,6 +71,7 @@ class ClusterMax(Cluster):
 
         return np.max(distances)
 
+
 class ClusterAverage(Cluster):
     """
     Cluster class for average linkage.

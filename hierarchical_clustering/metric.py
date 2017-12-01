@@ -29,3 +29,8 @@ def l2(X,Y):
 
 
 
+<<<<<<< Updated upstream
+=======
+
+
+>>>>>>> Stashed changes

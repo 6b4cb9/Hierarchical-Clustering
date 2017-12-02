@@ -1,5 +1,5 @@
 import numpy as np
-
+from metric import MetricsFunctions
 
 class StepInfo:
     def __init__(self):
@@ -18,10 +18,21 @@ class HierarchicalClustering:
         self._step_info = StepInfo()
 
     def fit(self, X):
+        #sprawdzic linkage i w zaleznosci od tego odpowiednio uzupelnic
+        #na podstawie affine_metric
+        #self.cluster_list = np.array(len)
+        #addifne -> MetricFunctions('eucl')
+        #affine ma stringa, odpowiada funkcji
         self._points = X
         self._labels = np.arange(len(X))
+        metric = MetricsFunctions(self.affine)
+        distance = 0.0
+        for i in range(len(X)):
+            for j in range(len(X)-i-1):
+                distance += metric.compute(X[i],X[j+i+1])
+        
         #cluster list ma byc tyle elementow ile w n_clusters
-        while self._step_info.cluster_list > self.n_clusters:
+        while len(self._step_info.cluster_list) > self.n_clusters:
             self._step()
 
     def fit_predict(self, X, y=None):

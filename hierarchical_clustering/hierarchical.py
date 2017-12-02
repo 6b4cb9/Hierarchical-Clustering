@@ -35,8 +35,8 @@ class HierarchicalClustering:
         self._step_info.initial_distance = np.zeros(shape=(size, size), dtype=np.float)
         for i in range(size):
             self._step_info.initial_distance[i, i] = 0
-            for j in range(size - i - 1):
-                distance = metric.compute(X[i], X[j + i + 1])
+            for j in range(i):
+                distance = metric.compute(X[i], X[j])
                 self._step_info.initial_distance[i, j] = distance
                 self._step_info.initial_distance[j, i] = distance
 

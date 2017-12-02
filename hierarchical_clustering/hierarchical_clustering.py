@@ -22,7 +22,7 @@ class HierarchicalClustering:
         self._points = X
         self._labels = np.arange(len(X))
         self.init_distance(X)
-        self._step_info.cluster_list =
+        
         
         #cluster list ma byc tyle elementow ile w n_clusters
         while len(self._step_info.cluster_list) > self.n_clusters:

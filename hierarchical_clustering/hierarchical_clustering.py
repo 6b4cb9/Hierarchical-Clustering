@@ -3,9 +3,9 @@ import numpy as np
 
 class StepInfo:
     def __init__(self):
-        self.cluster_list = None
-        self.initial_distance = None
-        self.current_distance = None
+        self.cluster_list = np.array([])
+        self.initial_distance = np.array([])
+        self.current_distance = np.array([])
 
 
 class HierarchicalClustering:
@@ -36,7 +36,16 @@ class HierarchicalClustering:
         pass
 
     def _step(self):
-        p,q=np.unravel_index(self._step_info.current_distance.argmin(), self._step_info.current_distance.shape)
-        self._step_info.cluster_list[p] = np.concatenate(self._step_info.cluster_list[p],self._step_info.cluster_list[q])
+        p, q = np.sort(np.unravel_index(self._step_info.current_distance.argmin(),
+                                        self._step_info.current_distance.shape))
 
+        self._step_info.cluster_list[p].merge(q)
 
+        clusters_size = self._step_info.cluster_list.size
+        for i in range(clusters_size):
+            dist = self._step_info.cluster_list[p].distance(p, i)
+            self._step_info.current_distance[p, i] = dist
+            self._step_info.current_distance[i, p] = dist
+
+        self._step_info.current_distance = np.delete(self._step_info.current_distance, q, axis=0)
+        self._step_info.current_distance = np.delete(self._step_info.current_distance, q, axis=1)

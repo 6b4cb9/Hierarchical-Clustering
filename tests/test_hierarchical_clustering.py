@@ -22,7 +22,8 @@ class TestWardClustering(unittest.TestCase):
         test_ans = test.fit_predict(test_data)
 
         ans = np.array_equal(test_ans, reference_ans)
-        self.assertEqual(ans, True)
+        msg = "get: " + str(test_data) + "instead of: " + str(reference_ans)
+        self.assertEqual(ans, True, msg)
 
 
 class TestAverageClustering(unittest.TestCase):
@@ -42,7 +43,8 @@ class TestAverageClustering(unittest.TestCase):
         test_ans = test.fit_predict(test_data)
 
         ans = np.array_equal(test_ans, reference_ans)
-        self.assertEqual(ans, True)
+        msg = "get: " + str(test_data) + "instead of: " + str(reference_ans)
+        self.assertEqual(ans, True, msg)
 
     def test_l2_in_simple_case(self):
 
@@ -56,7 +58,8 @@ class TestAverageClustering(unittest.TestCase):
         test_ans = test.fit_predict(test_data)
 
         ans = np.array_equal(test_ans, reference_ans)
-        self.assertEqual(ans, True)
+        msg = "get: " + str(test_data) + "instead of: " + str(reference_ans)
+        self.assertEqual(ans, True, msg)
 
 
 class TestCompleteClustering(unittest.TestCase):
@@ -74,7 +77,8 @@ class TestCompleteClustering(unittest.TestCase):
         test_ans = test.fit_predict(test_data)
 
         ans = np.array_equal(test_ans, reference_ans)
-        self.assertEqual(ans, True)
+        msg = "get: " + str(test_data) + "instead of: " + str(reference_ans)
+        self.assertEqual(ans, True, msg)
 
     def test_l2_in_simple_case(self):
         test_data = np.array([[0, 1, 3, 12, 12, 11, 13, 1055], [-1, -1, -1, 0, 0, 0, 0, 1]])
@@ -87,7 +91,8 @@ class TestCompleteClustering(unittest.TestCase):
         test_ans = test.fit_predict(test_data)
 
         ans = np.array_equal(test_ans, reference_ans)
-        self.assertEqual(ans, True)
+        msg = "get: " + str(test_data) + "instead of: " + str(reference_ans)
+        self.assertEqual(ans, True, msg)
 
 
 class GeneralTest(unittest.TestCase):
@@ -106,7 +111,8 @@ class GeneralTest(unittest.TestCase):
         test_ans = test.fit_predict(test_data)
 
         ans = np.array_equal(test_ans, reference_ans)
-        self.assertEqual(ans, True)
+        msg = "get: " + str(test_data) + "instead of: " + str(reference_ans)
+        self.assertEqual(ans, True, msg)
 
 
 if __name__ == "__main__":

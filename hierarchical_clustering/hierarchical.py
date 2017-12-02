@@ -1,6 +1,6 @@
 import numpy as np
-from metric import MetricsFunctions
-import cluster
+from hierarchical_clustering.metric import MetricsFunctions
+import hierarchical_clustering.cluster
 
 class HierarchicalClustering:
     def __init__(self, affine, linkage, n_clusters):

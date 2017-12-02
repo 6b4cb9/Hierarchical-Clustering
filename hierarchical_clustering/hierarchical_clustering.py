@@ -10,6 +10,7 @@ class HierarchicalClustering:
         self._points = None
         self._labels = None
         self._step_info = cluster.Cluster.step_info
+        self._cluster_distance_function = None
 
     def fit(self, X):
         #sprawdzic linkage i w zaleznosci od tego odpowiednio uzupelnic
@@ -48,7 +49,7 @@ class HierarchicalClustering:
 
         clusters_size = self._step_info.cluster_list.size
         for i in range(clusters_size):
-            dist = self._step_info.cluster_list[p].distance(p, i)
+            dist = self._cluster_distance_function(p, i)
             self._step_info.current_distance[p, i] = dist
             self._step_info.current_distance[i, p] = dist
 

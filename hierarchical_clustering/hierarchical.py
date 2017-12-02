@@ -3,7 +3,7 @@ from hierarchical_clustering.metric import MetricsFunctions
 import hierarchical_clustering.cluster as cluster
 
 class HierarchicalClustering:
-    def __init__(self, affinity, linkage, n_clusters):
+    def __init__(self, n_clusters=2, affinity="euclidean", linkage="ward"):
         self.affinity = affinity
         self.linkage = linkage
         self.n_clusters = n_clusters
@@ -69,11 +69,15 @@ class HierarchicalClustering:
         self._step_info.cluster_list[p].merge(q)
 
         clusters_size = self._step_info.cluster_list.size
+        new_distances = np.zeros(shape=(clusters_size), dtype=np.float)
         for i in range(clusters_size):
-            if i != p:
-                dist = self._step_info.cluster_class.distance(p, i)
-                self._step_info.current_distance[p, i] = dist
-                self._step_info.current_distance[i, p] = dist
+            if i == p:
+                new_distances[i] = np.nan
+            else:
+                new_distances[i] = self._step_info.cluster_class.distance(p, i)
+
+        self._step_info.current_distance[p,:] = new_distances
+        self._step_info.current_distance[:,p] = new_distances
 
         self._step_info.current_distance = np.delete(self._step_info.current_distance, q, axis=0)
         self._step_info.current_distance = np.delete(self._step_info.current_distance, q, axis=1)

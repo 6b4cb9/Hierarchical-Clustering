@@ -20,17 +20,17 @@ class HierarchicalClustering:
     def fit(self, X):
         self._points = X
         self._labels = np.arange(len(X))
-        pass
+        #cluster list ma byc tyle elementow ile w n_clusters
+        while self._step_info.cluster_list > self.n_clusters:
+            self._step()
 
     def fit_predict(self, X, y=None):
-        self._points = X
-        self._labels = np.arange(len(X))
-        pass
+        self.fit()
         y = self._labels
         return y
 
     def get_params(self, deep=True):
-        pass
+       pass
 
     def set_params(self, **params):
         pass

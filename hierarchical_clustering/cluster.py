@@ -167,16 +167,20 @@ class ClusterWard(Cluster):
         distances = np.copy(Cluster.step_info.current_distance)
         merged_id = self._merged_id
 
-        self_size = self._old_points_size
-        merged_size = Cluster.step_info.cluster_list[merged_id].points_id.size
-        other_size = Cluster.step_info.cluster_list[other_id].points_id.size
+        if merged_id == self_id:
+            #if used before merging
+            return distances[self_id, other_id]
+        else:
+            self_size = self._old_points_size
+            merged_size = Cluster.step_info.cluster_list[merged_id].points_id.size
+            other_size = Cluster.step_info.cluster_list[other_id].points_id.size
 
-        denominator = self_size + merged_size + other_size
-        a1 = (self_size + other_size)/denominator
-        a2 = (merged_size + other_size)/denominator
-        b = -other_size/denominator
+            denominator = self_size + merged_size + other_size
+            a1 = (self_size + other_size)/denominator
+            a2 = (merged_size + other_size)/denominator
+            b = -other_size/denominator
 
-        return a1*distances[self_id, other_id] + a2*distances[merged_id, other_id] + b*distances[self_id, merged_id]
+            return a1*distances[self_id, other_id] + a2*distances[merged_id, other_id] + b*distances[self_id, merged_id]
 
 
 

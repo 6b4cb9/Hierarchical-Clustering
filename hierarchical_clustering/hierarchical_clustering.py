@@ -9,7 +9,7 @@ class StepInfo:
 
 
 class HierarchicalClustering:
-    def __init(self, affine, linkage, n_clusters):
+    def __init__(self, affine, linkage, n_clusters):
         self.affine = affine
         self.linkage = linkage
         self.n_clusters = n_clusters

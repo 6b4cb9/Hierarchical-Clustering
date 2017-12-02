@@ -19,15 +19,22 @@ class HierarchicalClustering:
         #addifne -> MetricFunctions('eucl')
         #affine ma stringa, odpowiada funkcji
         X = np.array(X)
+        size = np.shape(X)[0]
         self._points = X
-        self._labels = np.arange(len(X))
+        self._labels = np.arange(size)
         self._init_distance(X)
         self._step_info.current_distance = np.copy(self._step_info.initial_distance)
-        self._init_cluster_list(X.size)
+        self._init_cluster_list(size)
         
         #cluster list ma byc tyle elementow ile w n_clusters
         while len(self._step_info.cluster_list) > self.n_clusters:
             self._step()
+
+        for i in range(self.n_clusters):
+            cluster_size = self._step_info.cluster_list[i].points_id.size
+            for j in range(cluster_size):
+                self._labels[self._step_info.cluster_list[i].points_id[j]] = i
+
 
     def _init_distance(self,X):
         metric = MetricsFunctions(self.affinity)

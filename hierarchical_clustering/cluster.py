@@ -1,5 +1,4 @@
 import numpy as np
-import hierarchical_clustering
 
 
 class StepInfo:
@@ -7,6 +6,15 @@ class StepInfo:
         self.cluster_list = None
         self.initial_distance = None
         self.current_distance = None
+        self.cluster_class = None
+
+    def select_class(self, name):
+        possibilities = {"complete": ClusterMax, "max": ClusterMax,
+                         "average": ClusterAverage, "ward": ClusterWard}
+        if name in possibilities.keys():
+            self.cluster_class = possibilities[name]
+        else:
+            raise Exception('Bad cluster class')
 
 
 class Cluster:
@@ -14,6 +22,7 @@ class Cluster:
     Interface of cluster.
     """
     step_info = StepInfo()
+
     def __init__(self, initial_point_id):
         """
         Constructor of Cluster class.
@@ -161,20 +170,20 @@ class ClusterWard(Cluster):
 
 
 if __name__ == "__main__":
-    step_info_ = ClusterMax.step_info
-    cluster_distance = ClusterAverage.distance
+    step_info_ = Cluster.step_info
+    step_info_.select_class("ward")
     step_info_.initial_distance = np.array([[0, 2, 3], [2, 0, 4], [3, 4, 0]]) / 10
     step_info_.current_distance = np.array([[0, 2, 3], [2, 0, 4], [3, 4, 0]])
 
-    cluster0 = ClusterAverage(0)
-    cluster1 = ClusterAverage(1)
-    cluster2 = ClusterAverage(2)
+    cluster0 = step_info_.cluster_class(0)
+    cluster1 = step_info_.cluster_class(1)
+    cluster2 = step_info_.cluster_class(2)
 
     step_info_.cluster_list = np.array([cluster0, cluster1, cluster2])
 
     cluster0.merge(1)
 
     print(cluster0, cluster1, cluster2)
-    print(cluster_distance(0, 1))
+    print(step_info_.cluster_class.distance(0, 1))
 
 

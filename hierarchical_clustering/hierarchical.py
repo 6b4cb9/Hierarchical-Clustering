@@ -1,10 +1,10 @@
 import numpy as np
 from hierarchical_clustering.metric import MetricsFunctions
-import hierarchical_clustering.cluster
+import hierarchical_clustering.cluster as cluster
 
 class HierarchicalClustering:
-    def __init__(self, affine, linkage, n_clusters):
-        self.affine = affine
+    def __init__(self, affinity, linkage, n_clusters):
+        self.affinity = affinity
         self.linkage = linkage
         self.n_clusters = n_clusters
         self._points = None
@@ -30,7 +30,7 @@ class HierarchicalClustering:
             self._step()
 
     def _init_distance(self,X):
-        metric = MetricsFunctions(self.affine)
+        metric = MetricsFunctions(self.affinity)
         size = X.size
         self._step_info.initial_distance = np.zeros(shape=(size, size), dtype=np.float)
         for i in range(size):

@@ -34,9 +34,9 @@ class HierarchicalClustering:
         size = X.size
         self._step_info.initial_distance = np.zeros(shape=(size, size), dtype=np.float)
         for i in range(size):
-            self._step_info.initial_distance[i, i] = 0
-            for j in range(size - i - 1):
-                distance = metric.compute(X[i], X[j + i + 1])
+            self._step_info.initial_distance[i, i] = np.nan
+            for j in range(i):
+                distance = metric.compute(X[i], X[j])
                 self._step_info.initial_distance[i, j] = distance
                 self._step_info.initial_distance[j, i] = distance
 
@@ -56,16 +56,17 @@ class HierarchicalClustering:
         pass
 
     def _step(self):
-        p, q = np.sort(np.unravel_index(self._step_info.current_distance.argmin(),
+        p, q = np.sort(np.unravel_index(np.nanargmin(self._step_info.current_distance),
                                         self._step_info.current_distance.shape))
 
         self._step_info.cluster_list[p].merge(q)
 
         clusters_size = self._step_info.cluster_list.size
         for i in range(clusters_size):
-            dist = self._step_info.cluster_class.distance(p, i)
-            self._step_info.current_distance[p, i] = dist
-            self._step_info.current_distance[i, p] = dist
+            if i != p:
+                dist = self._step_info.cluster_class.distance(p, i)
+                self._step_info.current_distance[p, i] = dist
+                self._step_info.current_distance[i, p] = dist
 
         self._step_info.current_distance = np.delete(self._step_info.current_distance, q, axis=0)
         self._step_info.current_distance = np.delete(self._step_info.current_distance, q, axis=1)

@@ -13,7 +13,7 @@ class MetricsFunctions:
         :param string: name of metric
         """
         self.string = string
-        self.my_dict = {'eucl': eucl, 'l1': l1, "l2": eucl, 'euclidian': eucl, 'manhattan': l1}
+        self.my_dict = {'eucl': eucl, 'l1': l1, "l2": eucl, 'euclidean': eucl, 'manhattan': l1}
 
     def compute(self, x, y):
         """

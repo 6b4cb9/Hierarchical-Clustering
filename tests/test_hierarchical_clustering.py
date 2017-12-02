@@ -56,7 +56,7 @@ class TestAverageClustering(unittest.TestCase):
         test_ans = test.fit_predict(test_data)
 
         ans = np.array_equal(test_ans, reference_ans)
-        self.assertEqual(ans, True))
+        self.assertEqual(ans, True)
 
 
 class TestCompleteClustering(unittest.TestCase):
@@ -95,6 +95,7 @@ class GeneralTest(unittest.TestCase):
         pass
 
     def argument_matching(self):
+        """Tests if our interface is compatible with sklearn."""
         test_data = np.array([[0, 1, 3, 12, 12, 11, 13, 1055], [-1, -1, -1, 0, 0, 0, 0, 1]])
         test_data = test_data.transpose()
 

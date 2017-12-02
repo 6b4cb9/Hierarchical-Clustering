@@ -170,7 +170,7 @@ class ClusterWard(Cluster):
 
 
 if __name__ == "__main__":
-    step_info_ = ClusterMax.step_info
+    step_info_ = Cluster.step_info
     step_info_.select_class("ward")
     step_info_.initial_distance = np.array([[0, 2, 3], [2, 0, 4], [3, 4, 0]]) / 10
     step_info_.current_distance = np.array([[0, 2, 3], [2, 0, 4], [3, 4, 0]])

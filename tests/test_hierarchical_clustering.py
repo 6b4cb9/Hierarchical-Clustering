@@ -21,7 +21,8 @@ class TestWardClustering(unittest.TestCase):
         test = hierarchical.HierarchicalClustering(n_clusters=3, affinity="euclidean", linkage="ward")
         test_ans = test.fit_predict(test_data)
 
-        self.assertEqual(test_ans, reference_ans)
+        ans = np.array_equal(test_ans, reference_ans)
+        self.assertEqual(ans, True)
 
 
 class TestAverageClustering(unittest.TestCase):
@@ -40,7 +41,8 @@ class TestAverageClustering(unittest.TestCase):
         test = hierarchical.HierarchicalClustering(n_clusters=3, affinity="euclidean", linkage="average")
         test_ans = test.fit_predict(test_data)
 
-        self.assertEqual(test_ans, reference_ans)
+        ans = np.array_equal(test_ans, reference_ans)
+        self.assertEqual(ans, True)
 
     def test_l2_in_simple_case(self):
 
@@ -53,7 +55,8 @@ class TestAverageClustering(unittest.TestCase):
         test = hierarchical.HierarchicalClustering(n_clusters=3, affinity="l2", linkage="average")
         test_ans = test.fit_predict(test_data)
 
-        self.assertEqual(test_ans, reference_ans)
+        ans = np.array_equal(test_ans, reference_ans)
+        self.assertEqual(ans, True))
 
 
 class TestCompleteClustering(unittest.TestCase):
@@ -70,7 +73,8 @@ class TestCompleteClustering(unittest.TestCase):
         test = hierarchical.HierarchicalClustering(n_clusters=3, affinity="euclidean", linkage="complete")
         test_ans = test.fit_predict(test_data)
 
-        self.assertEqual(test_ans, reference_ans)
+        ans = np.array_equal(test_ans, reference_ans)
+        self.assertEqual(ans, True)
 
     def test_l2_in_simple_case(self):
         test_data = np.array([[0, 1, 3, 12, 12, 11, 13, 1055], [-1, -1, -1, 0, 0, 0, 0, 1]])
@@ -82,7 +86,8 @@ class TestCompleteClustering(unittest.TestCase):
         test = hierarchical.HierarchicalClustering(n_clusters=3, affinity="l2", linkage="complete")
         test_ans = test.fit_predict(test_data)
 
-        self.assertEqual(test_ans, reference_ans)
+        ans = np.array_equal(test_ans, reference_ans)
+        self.assertEqual(ans, True)
 
 
 class GeneralTest(unittest.TestCase):
@@ -99,7 +104,8 @@ class GeneralTest(unittest.TestCase):
         test = hierarchical.HierarchicalClustering(3, "euclidean")
         test_ans = test.fit_predict(test_data)
 
-        self.assertEqual(test_ans, reference_ans)
+        ans = np.array_equal(test_ans, reference_ans)
+        self.assertEqual(ans, True)
 
 
 if __name__ == "__main__":

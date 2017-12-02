@@ -57,8 +57,8 @@ class TestWardClustering(unittest.TestCase):
         self.assertEqual(ans, True, msg)
 
     def test_large_dataset(self):
-        n_samples = 200
-        circles = sklearn.datasets.make_circles(n_samples=n_samples, factor=.5, noise=0)
+        n_samples = 400
+        circles = sklearn.datasets.make_circles(n_samples=n_samples, factor=.02, noise=0)
         data, y = circles
 
         reference = sklearn.cluster.AgglomerativeClustering(n_clusters=2, affinity="euclidean", linkage="ward")
@@ -80,10 +80,12 @@ class TestWardClustering(unittest.TestCase):
         plt.subplot(2, 1, 1)
         colors = np.array(list(islice(cycle(['#377eb8', '#ff7f00', '#4daf4a', '#f781bf']), int(max(test_ans) + 1))))
         plt.scatter(data[:, 0], data[:, 1], s=2, color=colors[test_ans])
+        plt.title("Our")
 
         plt.subplot(2, 1, 2)
         colors = np.array(list(islice(cycle(['#377eb8', '#ff7f00', '#4daf4a', '#f781bf']), int(max(reference_ans) + 1))))
         plt.scatter(data[:, 0], data[:, 1], s=2, color=colors[reference_ans])
+        plt.title("Reference")
 
         plt.show()
         self.assertEqual(ans, True, msg)

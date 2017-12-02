@@ -10,6 +10,7 @@ import numpy as np
 class MetricsFunctions:
     def __init__(self, string):
         """
+        Constructor of MetricsFuntions class
         :param string: name of metric
         """
         self.string = string
@@ -17,6 +18,7 @@ class MetricsFunctions:
 
     def compute(self, x, y):
         """
+        Functions that computes distance between set, metric depends on this class string parameter
         :param x: vector of first set of points
         :param y: vector of second set of points 
         :return: calculated metric value
@@ -31,7 +33,7 @@ class MetricsFunctions:
 
 def eucl(x, y):
     """
-    
+    metric that computes distance as sum of square differences
     :param x: vector of first set of points 
     :param y: vector of second set of points 
     :return: calculated metric value
@@ -41,7 +43,7 @@ def eucl(x, y):
 
 def l1(x, y):
     """
-    
+     metric that computes distance as absolute value of differences
     :param x: vector of first set of points 
     :param y: vector of second set of points 
     :return: calculated metric value

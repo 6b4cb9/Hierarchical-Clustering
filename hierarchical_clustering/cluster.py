@@ -142,7 +142,7 @@ class ClusterWard(Cluster):
         """
         Cluster.__init__(self, initial_point_id)
         self._merged_id = initial_point_id
-        self._old_points_size = 0
+        self._old_points_size = 1
 
     def merge(self, other_id):
         """

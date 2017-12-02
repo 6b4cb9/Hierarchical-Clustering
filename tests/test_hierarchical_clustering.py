@@ -85,6 +85,23 @@ class TestCompleteClustering(unittest.TestCase):
         self.assertEqual(test_ans, reference_ans)
 
 
+class GeneralTest(unittest.TestCase):
+    def setUp(self):
+        pass
+
+    def argument_matching(self):
+        test_data = np.array([[0, 1, 3, 12, 12, 11, 13, 1055], [-1, -1, -1, 0, 0, 0, 0, 1]])
+        test_data = test_data.transpose()
+
+        reference = sklearn.cluster.AgglomerativeClustering(3, "euclidean")
+        reference_ans = reference.fit_predict(test_data)
+
+        test = hierarchical.HierarchicalClustering(3, "euclidean")
+        test_ans = test.fit_predict(test_data)
+
+        self.assertEqual(test_ans, reference_ans)
+
+
 if __name__ == "__main__":
     unittest.main()
 

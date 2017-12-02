@@ -2,13 +2,24 @@ import numpy as np
 
 
 class StepInfo:
+    """
+    Class containing all important data for computing step in HierarchicalClustering including cluster class.
+    """
     def __init__(self):
+        """
+        Constructor.
+        """
         self.cluster_list = None
         self.initial_distance = None
         self.current_distance = None
         self.cluster_class = None
 
     def select_class(self, name):
+        """
+        Select cluster class.
+        :param name: name of cluster class; possibilities = "complete", "max", "average", "ward"
+        :return:
+        """
         possibilities = {"complete": ClusterMax, "max": ClusterMax,
                          "average": ClusterAverage, "ward": ClusterWard}
         if name in possibilities.keys():
@@ -130,7 +141,7 @@ class ClusterWard(Cluster):
         :param step_info: reference to object of class StepInfo
         """
         Cluster.__init__(self, initial_point_id)
-        self._merged_id = -1
+        self._merged_id = initial_point_id
         self._old_points_size = 0
 
     def merge(self, other_id):

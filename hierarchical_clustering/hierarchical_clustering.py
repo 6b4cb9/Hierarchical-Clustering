@@ -1,12 +1,6 @@
 import numpy as np
 from metric import MetricsFunctions
-
-class StepInfo:
-    def __init__(self):
-        self.cluster_list = np.array([])
-        self.initial_distance = np.array([])
-        self.current_distance = np.array([])
-
+import cluster
 
 class HierarchicalClustering:
     def __init__(self, affine, linkage, n_clusters):
@@ -15,7 +9,7 @@ class HierarchicalClustering:
         self.n_clusters = n_clusters
         self._points = None
         self._labels = None
-        self._step_info = StepInfo()
+        self._step_info = cluster.Cluster.step_info
 
     def fit(self, X):
         #sprawdzic linkage i w zaleznosci od tego odpowiednio uzupelnic

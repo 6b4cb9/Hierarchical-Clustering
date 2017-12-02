@@ -31,7 +31,7 @@ class HierarchicalClustering:
 
     def _init_distance(self,X):
         metric = MetricsFunctions(self.affinity)
-        size = X.size
+        size = np.shape(X)[0]
         self._step_info.initial_distance = np.zeros(shape=(size, size), dtype=np.float)
         for i in range(size):
             self._step_info.initial_distance[i, i] = np.nan

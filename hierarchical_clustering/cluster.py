@@ -2,13 +2,24 @@ import numpy as np
 
 
 class StepInfo:
+    """
+    Class containing all important data for computing step in HierarchicalClustering including cluster class.
+    """
     def __init__(self):
+        """
+        Constructor.
+        """
         self.cluster_list = None
         self.initial_distance = None
         self.current_distance = None
         self.cluster_class = None
 
     def select_class(self, name):
+        """
+        Select cluster class.
+        :param name: name of cluster class; possibilities = "complete", "max", "average", "ward"
+        :return:
+        """
         possibilities = {"complete": ClusterMax, "max": ClusterMax,
                          "average": ClusterAverage, "ward": ClusterWard}
         if name in possibilities.keys():
@@ -130,8 +141,8 @@ class ClusterWard(Cluster):
         :param step_info: reference to object of class StepInfo
         """
         Cluster.__init__(self, initial_point_id)
-        self._merged_id = -1
-        self._old_points_size = 0
+        self._merged_id = initial_point_id
+        self._old_points_size = 1
 
     def merge(self, other_id):
         """
@@ -156,16 +167,20 @@ class ClusterWard(Cluster):
         distances = np.copy(Cluster.step_info.current_distance)
         merged_id = self._merged_id
 
-        self_size = self._old_points_size
-        merged_size = Cluster.step_info.cluster_list[merged_id].points_id.size
-        other_size = Cluster.step_info.cluster_list[other_id].points_id.size
+        if merged_id == self_id:
+            #if used before merging
+            return distances[self_id, other_id]
+        else:
+            self_size = self._old_points_size
+            merged_size = Cluster.step_info.cluster_list[merged_id].points_id.size
+            other_size = Cluster.step_info.cluster_list[other_id].points_id.size
 
-        denominator = self_size + merged_size + other_size
-        a1 = (self_size + other_size)/denominator
-        a2 = (merged_size + other_size)/denominator
-        b = -other_size/denominator
+            denominator = self_size + merged_size + other_size
+            a1 = (self_size + other_size)/denominator
+            a2 = (merged_size + other_size)/denominator
+            b = -other_size/denominator
 
-        return a1*distances[self_id, other_id] + a2*distances[merged_id, other_id] + b*distances[self_id, merged_id]
+            return a1*distances[self_id, other_id] + a2*distances[merged_id, other_id] + b*distances[self_id, merged_id]
 
 
 

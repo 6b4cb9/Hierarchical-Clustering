@@ -36,4 +36,7 @@ class HierarchicalClustering:
         pass
 
     def _step(self):
-        pass
+        p,q=np.unravel_index(self._step_info.current_distance.argmin(), self._step_info.current_distance.shape)
+        self._step_info.cluster_list[p] = np.concatenate(self._step_info.cluster_list[p],self._step_info.cluster_list[q])
+
+

@@ -3,7 +3,16 @@ from hierarchical_clustering.metric import MetricsFunctions
 import hierarchical_clustering.cluster as cluster
 
 class HierarchicalClustering:
+    """
+    Main class for hierarchical clustering.
+    """
     def __init__(self, n_clusters=2, affinity="euclidean", linkage="ward"):
+        """
+        Constructor.
+        :param n_clusters: number of expected final clusters.
+        :param affinity: metric used to compute the linkage; can be 'eucl', 'l1', 'l2', 'euclidean', 'manhattan'; default is 'euclidean'
+        :param linkage: which linkage criterion to use; can be 'ward', 'complete', 'max', 'average'; default is 'ward'
+        """
         self.affinity = affinity
         self.linkage = linkage
         self.n_clusters = n_clusters
@@ -13,11 +22,11 @@ class HierarchicalClustering:
         self._step_info.select_class(linkage)
 
     def fit(self, X):
-        #sprawdzic linkage i w zaleznosci od tego odpowiednio uzupelnic
-        #na podstawie affine_metric
-        #self.cluster_list = np.array(len)
-        #addifne -> MetricFunctions('eucl')
-        #affine ma stringa, odpowiada funkcji
+        """
+        Fit the hierarchical clustering on the data.
+        :param X: data
+        :return:
+        """
         X = np.array(X)
         size = np.shape(X)[0]
         self._points = X
@@ -26,7 +35,6 @@ class HierarchicalClustering:
         self._step_info.current_distance = np.copy(self._step_info.initial_distance)
         self._init_cluster_list(size)
         
-        #cluster list ma byc tyle elementow ile w n_clusters
         while len(self._step_info.cluster_list) > self.n_clusters:
             self._step()
 
@@ -37,6 +45,11 @@ class HierarchicalClustering:
 
 
     def _init_distance(self,X):
+        """
+        Create initial distance matrix.
+        :param X: data
+        :return:
+        """
         metric = MetricsFunctions(self.affinity)
         size = np.shape(X)[0]
         self._step_info.initial_distance = np.zeros(shape=(size, size), dtype=np.float)
@@ -48,21 +61,29 @@ class HierarchicalClustering:
                 self._step_info.initial_distance[j, i] = distance
 
     def _init_cluster_list(self, n):
+        """
+        Create initial cluster list.
+        :param n: number of clusters
+        :return:
+        """
         self._step_info.cluster_list = np.array([self._step_info.cluster_class(i) for i in range(n)])
 
 
-    def fit_predict(self, X, y=None):
+    def fit_predict(self, X):
+        """
+        Fit the hierarchical clustering on the data and return labels.
+        :param X: data
+        :return:
+        """
         self.fit(X)
-        y = self._labels
+        y = np.copy(self._labels)
         return y
 
-    def get_params(self, deep=True):
-       pass
-
-    def set_params(self, **params):
-        pass
-
     def _step(self):
+        """
+        Merge two clusters into one.
+        :return:
+        """
         p, q = np.sort(np.unravel_index(np.nanargmin(self._step_info.current_distance),
                                         self._step_info.current_distance.shape))
 

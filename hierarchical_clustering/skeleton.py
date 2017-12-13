@@ -23,9 +23,9 @@ import logging
 
 from hierarchical_clustering import __version__
 
-__author__ = "Marcin Rosenhof"
-__copyright__ = "Marcin Rosenhof"
-__license__ = "none"
+__author__ = "Paweł Donath, Marcin Rosenhof, Krystian Bytnar"
+__copyright__ = "Paweł Donath, Marcin Rosenhof, Krystian Bytnar"
+__license__ = "gpl3"
 
 _logger = logging.getLogger(__name__)
 

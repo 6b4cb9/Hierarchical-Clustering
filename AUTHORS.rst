@@ -2,6 +2,4 @@
 Developers
 ==========
 
-* Marcin Rosenhof <6b4cb9@gmail.com>
-* Paweł Donath <donath@student.agh.edu.pl>
-* Krystian Bytnar <kbytnar@gmail.com>
+* Paweł Donath, Marcin Rosenhof, Krystian Bytnar <pawdonapi@gmail.com, 6b4cb9@gmail.com, kbytnar@gmail.com>

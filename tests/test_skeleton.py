@@ -4,9 +4,9 @@
 import pytest
 from hierarchical_clustering.skeleton import fib
 
-__author__ = "Marcin Rosenhof"
-__copyright__ = "Marcin Rosenhof"
-__license__ = "none"
+__author__ = "Paweł Donath, Marcin Rosenhof, Krystian Bytnar"
+__copyright__ = "Paweł Donath, Marcin Rosenhof, Krystian Bytnar"
+__license__ = "gpl3"
 
 
 def test_fib():
